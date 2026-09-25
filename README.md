@@ -99,6 +99,17 @@ tests/            unit test (node --test)
 Sambungkan repo ke Cloudflare Pages, Netlify, atau Vercel sebagai situs statis:
 tanpa build command, output directory `/`. Setiap push langsung ter-deploy.
 
+**Docker / Easypanel**: [Dockerfile](Dockerfile) menyajikan situs lewat nginx di port 80
+(konfigurasinya di [nginx.conf](nginx.conf)). Di Easypanel: buat App, source dari repo
+GitHub, build type Dockerfile, lalu di Domains arahkan domain ke port 80. HTML/JS/CSS
+(termasuk `config.js`) dikirim dengan `no-cache`, jadi edit config langsung terlihat
+setelah redeploy. Gambar di-cache 1 hari; kalau foto diganti dengan nama file yang sama,
+pengunjung lama baru melihat versi baru paling lambat sehari kemudian.
+
+```sh
+docker build -t grand-frame . && docker run --rm -p 8080:80 grand-frame
+```
+
 ## Analytics (opsional)
 
 Kalau Plausible atau GA4 dipasang di `index.html`, klik checkout dan waitlist otomatis

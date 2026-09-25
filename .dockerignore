@@ -1,0 +1,14 @@
+# Hanya file situs yang masuk image
+.git
+.gitignore
+.claude
+.DS_Store
+**/.DS_Store
+node_modules
+docs
+tests
+README.md
+package.json
+package-lock.json
+Dockerfile
+.dockerignore
