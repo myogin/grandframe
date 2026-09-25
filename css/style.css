@@ -385,6 +385,14 @@ button { cursor: pointer; }
   }
 }
 
+/* Saat halaman dibuka: teks naik bergiliran. Foto hero (LCP) tanpa delay. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > * { animation: rise-in 0.8s var(--ease-out) backwards; }
+  .hero-sub { animation-delay: 0.12s; }
+  .hero-actions { animation-delay: 0.24s; }
+  .hero-media { animation: fade-in 1s ease-out; }
+}
+
 /* ---------- Section ---------- */
 
 .section {
@@ -561,6 +569,7 @@ button { cursor: pointer; }
 
 @media (prefers-reduced-motion: no-preference) {
   .card .stepper { animation: pop-in 0.18s var(--ease-out); }
+  .wall-empty { animation: fade-in 0.4s ease-out; }
 }
 
 /* ---------- Cara pesan ---------- */
@@ -655,6 +664,10 @@ button { cursor: pointer; }
   color: var(--tinta-2);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .faq details[open] p { animation: rise-in 0.35s var(--ease-out); }
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
@@ -715,6 +728,9 @@ button { cursor: pointer; }
   .drawer[open]::backdrop { animation: fade-in 0.28s ease-out; }
   .drawer.is-closing { animation: drawer-out 0.2s ease-in forwards; }
   .drawer.is-closing::backdrop { animation: fade-out 0.2s ease-in forwards; }
+  /* Tiap ganti tampilan (keranjang → konfirmasi → selesai) isinya memudar masuk. */
+  .drawer-view { animation: fade-in 0.3s ease-out; }
+  .drawer-message { animation-name: rise-in; }
 }
 
 .drawer-panel {
@@ -857,8 +873,37 @@ button { cursor: pointer; }
 
 /* ---------- Motion ---------- */
 
+/*
+ * Muncul saat pertama kali terlihat. js/app.js memasang .motion di <html> dan .is-in
+ * di tiap elemen. Tanpa JS, dengan reduced motion, atau saat dicetak, semua langsung tampil.
+ */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .motion .reveal,
+  .motion .card > .frame,
+  .motion .card > .card-body {
+    transition:
+      opacity 0.6s var(--ease-out) var(--delay, 0s),
+      transform 0.7s var(--ease-out) var(--delay, 0s);
+  }
+
+  .motion .reveal:not(.is-in) { opacity: 0; transform: translateY(16px); }
+
+  /* Kartu: frame turun sedikit seperti baru digantung. Rel tetap diam. */
+  .motion .card:not(.is-in) > .frame { opacity: 0; transform: translateY(-12px); }
+  .motion .card:not(.is-in) > .card-body { opacity: 0; transform: translateY(8px); }
+  .motion .card > .card-body { transition-delay: calc(var(--delay, 0s) + 0.08s); }
+
+  /* Foto memudar masuk setelah selesai dimuat; latar frame jadi placeholder. */
+  .motion .frame-img { transition: opacity 0.5s ease-out; }
+  .motion .frame-img:not(.is-loaded) { opacity: 0; }
+
+  /* Ganti filter: kartu lama memudar keluar dulu. */
+  .motion .wall.is-leaving > .card { opacity: 0; transition: opacity 0.18s ease-in; }
+}
+
 @keyframes drawer-in { from { transform: translateX(100%); } }
 @keyframes drawer-out { to { transform: translateX(100%); } }
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes fade-out { to { opacity: 0; } }
 @keyframes pop-in { from { opacity: 0; transform: scale(0.96); } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(12px); } }

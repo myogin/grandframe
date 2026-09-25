@@ -318,7 +318,12 @@ Produk tampil seperti frame yang digantung berjajar di dinding galeri. Beberapa 
 
 - Foto produk selalu jadi pusat perhatian. Warna UI tidak boleh bersaing dengan desain frame.
 - Section dipisahkan dengan garis tipis ala garis lapangan, bukan kartu berbayang.
-- Tidak ada animasi masuk per section. Motion hanya dipakai sebagai respons aksi, misalnya drawer terbuka, item ditambahkan, atau badge berubah.
+- Motion tenang, berupa fade halus, bukan efek mencolok:
+  - Saat halaman dibuka, teks hero muncul bergiliran.
+  - Heading, langkah "Cara pesan", dan FAQ memudar masuk saat pertama kali terlihat. Efek ini hanya sekali dan tidak diulang saat di-scroll balik.
+  - Kartu katalog muncul bergiliran per baris. Frame turun sedikit seperti baru digantung, sedangkan relnya tetap diam. Foto memudar masuk setelah selesai dimuat.
+  - Saat filter diganti, kartu lama memudar keluar dulu sebelum kartu baru muncul.
+  - Selebihnya motion hanya dipakai sebagai respons aksi, misalnya drawer terbuka, item ditambahkan, atau badge berubah.
 - Hindari label all-caps di atas heading dan ikon panah di setiap tombol.
 
 ## 12. Kebutuhan non-fungsional

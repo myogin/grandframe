@@ -98,6 +98,34 @@ function dropSrcsetOnError(img) {
   img.addEventListener("error", () => img.removeAttribute("srcset"), { once: true });
 }
 
+// ---------- Motion ----------
+
+// Elemen memudar masuk saat pertama kali terlihat. Dengan reduced motion semuanya langsung tampil.
+const revealer = reducedMotion.matches || !("IntersectionObserver" in window)
+  ? null
+  : new IntersectionObserver(onReveal, { rootMargin: "0px 0px -10% 0px" });
+
+function onReveal(entries) {
+  let i = 0;
+  for (const { target, isIntersecting, boundingClientRect } of entries) {
+    if (!isIntersecting && boundingClientRect.top > 0) continue;
+    // Yang terlihat bersamaan (misalnya satu baris kartu) muncul bergiliran.
+    target.style.setProperty("--delay", `${Math.min(i++, 5) * 80}ms`);
+    target.classList.add("is-in");
+    revealer.unobserve(target);
+  }
+}
+
+// Konten statis yang sudah di layar mungkin sudah tergambar, jadi tidak dianimasikan supaya tidak berkedip.
+function initReveal() {
+  if (!revealer) return;
+  for (const el of $$(".reveal")) {
+    if (el.getBoundingClientRect().top < innerHeight) el.classList.add("is-in");
+    else revealer.observe(el);
+  }
+  document.documentElement.classList.add("motion");
+}
+
 // ---------- Status batch ----------
 
 function refreshStatus() {
@@ -188,6 +216,13 @@ function renderFilters() {
     btn.textContent = label;
     return btn;
   }));
+  markFilter();
+}
+
+function markFilter() {
+  $$("#filters [data-filter]").forEach((btn) => {
+    btn.setAttribute("aria-pressed", String(btn.dataset.filter === filter));
+  });
 }
 
 function infoText() {
@@ -198,13 +233,12 @@ function infoText() {
 }
 
 function renderCatalog() {
-  $$("#filters [data-filter]").forEach((btn) => {
-    btn.setAttribute("aria-pressed", String(btn.dataset.filter === filter));
-  });
-
   const list = filter === "semua" ? catalog : catalog.filter((p) => p.category === filter);
+  const cards = list.map(buildCard);
+  $$(".card", wall).forEach((li) => revealer?.unobserve(li));
   wall.style.setProperty("--wmax", Math.max(1, ...list.map(widthOf)));
-  wall.replaceChildren(...list.map(buildCard));
+  wall.replaceChildren(...cards);
+  cards.forEach((li) => revealer?.observe(li));
 
   const empty = $("#wall-empty");
   empty.hidden = list.length > 0;
@@ -227,6 +261,11 @@ function buildCard(p) {
   img.width = 800;
   img.height = Math.round((800 * rh) / rw);
   img.alt = `Frame ${c.label} desain ${p.name}`;
+  if (revealer) {
+    const loaded = () => img.classList.add("is-loaded");
+    img.addEventListener("load", loaded, { once: true });
+    img.addEventListener("error", loaded, { once: true });
+  }
   if (/\.webp$/i.test(p.image)) {
     img.srcset = `${p.image} 800w, ${p.image.replace(/\.webp$/i, "-1600.webp")} 1600w`;
     dropSrcsetOnError(img);
@@ -507,6 +546,7 @@ renderFilters();
 renderCatalog();
 renderStatus();
 renderBadge(false);
+initReveal();
 scheduleStatusCheck();
 
 cart.subscribe(() => {
@@ -516,12 +556,21 @@ cart.subscribe(() => {
   syncCustomerInputs();
 });
 
+// Ganti filter: kartu lama memudar dulu, baru kartu kategori baru muncul.
+let swapTimer = 0;
 $("#filters").addEventListener("click", (e) => {
   const btn = e.target.closest("[data-filter]");
   if (!btn || btn.dataset.filter === filter) return;
   filter = btn.dataset.filter;
   writeFilter();
-  renderCatalog();
+  markFilter();
+  clearTimeout(swapTimer);
+  if (!revealer || !wall.children.length) return renderCatalog();
+  wall.classList.add("is-leaving");
+  swapTimer = setTimeout(() => {
+    wall.classList.remove("is-leaving");
+    renderCatalog();
+  }, 180);
 });
 
 wall.addEventListener("click", onWallClick);
