@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grand Frame — Frame pajangan raket tennis dan padel</title>
+  <meta name="description" content="Frame pajangan untuk raket tennis dan padel. Dibuat per batch pre-order, dipesan lewat WhatsApp.">
+  <meta name="theme-color" content="#EEF0EE">
+
+  <!-- Open Graph. TODO: setelah domain final, ganti og:image ke URL absolut dan isi og:url. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Grand Frame">
+  <meta property="og:title" content="Grand Frame — Raketmu layak dipajang.">
+  <meta property="og:description" content="Frame untuk raket tennis dan padel. Dibuat per batch, dipesan lewat WhatsApp.">
+  <meta property="og:image" content="img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Frame raket padel dan tennis tergantung di dinding galeri">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..600&family=Work+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..600&family=Work+Sans:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="modulepreload" href="config.js">
+  <link rel="modulepreload" href="js/batch.js">
+  <link rel="modulepreload" href="js/cart.js">
+  <link rel="modulepreload" href="js/whatsapp.js">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#katalog">Langsung ke katalog</a>
+
+  <p class="strip" id="batch-strip"></p>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top" data-brand>Grand Frame</a>
+      <nav class="nav" aria-label="Utama">
+        <a href="#katalog">Katalog</a>
+        <a href="#cara-pesan">Cara pesan</a>
+      </nav>
+      <button type="button" class="cart-btn" id="cart-open" aria-haspopup="dialog" aria-controls="drawer" aria-label="Buka keranjang, 0 item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="cart-badge" id="cart-badge" aria-hidden="true" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">Raketmu layak dipajang.</h1>
+        <p class="hero-sub">Frame untuk raket tennis dan padel. Dibuat per batch, dipesan lewat WhatsApp.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#katalog">Lihat katalog</a>
+          <a class="btn btn-secondary" data-waitlist target="_blank" rel="noopener" hidden>Kabari saya batch berikutnya</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="img/hero.webp" srcset="img/hero-800.webp 800w, img/hero.webp 1600w"
+             sizes="(min-width: 1264px) 572px, (min-width: 900px) 46vw, 100vw"
+             width="1600" height="1200" fetchpriority="high"
+             alt="Frame berisi raket padel dan raket tennis tergantung di dinding">
+      </div>
+    </section>
+
+    <section class="section" id="katalog" aria-labelledby="katalog-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="katalog-title" tabindex="-1">Katalog</h2>
+          <div class="filters" id="filters" role="group" aria-label="Filter kategori"></div>
+        </div>
+        <div class="info-bar">
+          <p id="info-text"></p>
+          <a class="text-link" data-waitlist target="_blank" rel="noopener" hidden>Kabari saya batch berikutnya</a>
+        </div>
+        <ul class="wall" id="wall"></ul>
+        <p class="wall-empty" id="wall-empty" hidden></p>
+        <noscript><p class="wall-empty">Aktifkan JavaScript untuk melihat katalog.</p></noscript>
+      </div>
+    </section>
+
+    <section class="section" id="cara-pesan" aria-labelledby="cara-pesan-title">
+      <div class="wrap">
+        <h2 id="cara-pesan-title">Cara pesan</h2>
+        <ol class="steps" role="list">
+          <li>
+            <h3>Pilih desain</h3>
+            <p>Tambahkan desain ke keranjang dan atur jumlahnya.</p>
+          </li>
+          <li>
+            <h3>Kirim pesanan via WhatsApp</h3>
+            <p>Isi nama dan kota. Pesan pesanan sudah terisi otomatis, tinggal kirim.</p>
+          </li>
+          <li>
+            <h3>Bayar</h3>
+            <p id="step-payment">Ketentuan pembayaran dikonfirmasi via WhatsApp.</p>
+          </li>
+          <li>
+            <h3>Produksi sesuai batch</h3>
+            <p id="step-production">Frame dibuat bersama pesanan lain di batch yang sama.</p>
+          </li>
+          <li>
+            <h3>Dikirim</h3>
+            <p id="step-ship">Estimasi pengiriman dikabari via WhatsApp.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title" hidden>
+      <div class="wrap faq-wrap">
+        <h2 id="faq-title">Pertanyaan umum</h2>
+        <div class="faq" id="faq-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="wordmark" data-brand>Grand Frame</p>
+      <ul class="footer-links">
+        <li><a id="footer-wa" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a id="footer-ig" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+      <p class="copyright">© <span id="year">2026</span> <span data-brand>Grand Frame</span></p>
+    </div>
+  </footer>
+
+  <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <h2 class="drawer-title" id="drawer-title">Keranjang</h2>
+        <button type="button" class="icon-btn" data-close aria-label="Tutup keranjang">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="drawer-view" data-view="cart">
+        <ul class="rows" id="rows"></ul>
+
+        <div class="drawer-empty" id="drawer-empty" hidden>
+          <p>Keranjang masih kosong.</p>
+          <button type="button" class="btn btn-secondary" data-to-catalog>Lihat katalog</button>
+        </div>
+
+        <form class="checkout" id="checkout" novalidate>
+          <div class="total">
+            <span>Total</span>
+            <strong id="total">Rp0</strong>
+          </div>
+          <p class="note">Belum termasuk ongkir. Ongkir dan pembayaran dikonfirmasi via WhatsApp.</p>
+
+          <div class="field">
+            <label for="f-name">Nama</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" maxlength="60" required aria-describedby="f-name-err">
+            <p class="field-err" id="f-name-err"></p>
+          </div>
+          <div class="field">
+            <label for="f-city">Kota</label>
+            <input id="f-city" name="city" type="text" autocomplete="address-level2" maxlength="60" required aria-describedby="f-city-err">
+            <p class="field-err" id="f-city-err"></p>
+          </div>
+
+          <p class="po-note" id="po-note" hidden></p>
+          <div class="closed-note" id="closed-note" hidden>
+            <p id="closed-text"></p>
+            <a class="text-link" data-waitlist target="_blank" rel="noopener" hidden>Kabari saya batch berikutnya</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="checkout-btn">Pesan via WhatsApp</button>
+        </form>
+      </div>
+
+      <div class="drawer-view drawer-message" data-view="confirm" hidden>
+        <h3 tabindex="-1">WhatsApp sudah dibuka. Sudah kirim pesannya?</h3>
+        <p>Kode pesanan: <strong id="confirm-code"></strong></p>
+        <div class="stack">
+          <button type="button" class="btn btn-primary btn-block" data-confirm="done">Sudah, kosongkan keranjang</button>
+          <button type="button" class="btn btn-secondary btn-block" data-confirm="reopen">Buka WhatsApp lagi</button>
+        </div>
+      </div>
+
+      <div class="drawer-view drawer-message" data-view="done" hidden>
+        <h3 tabindex="-1">Terima kasih.</h3>
+        <p>Konfirmasi pesanan, ongkir, dan pembayaran dilanjutkan di WhatsApp.</p>
+        <button type="button" class="btn btn-secondary" data-close>Tutup</button>
+      </div>
+
+      <p class="sr-only" id="drawer-announcer" aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <p class="sr-only" id="announcer" aria-live="polite"></p>
+
+  <template id="tpl-card">
+    <li class="card">
+      <div class="frame">
+        <img class="frame-img" alt="" loading="lazy" decoding="async"
+             sizes="(min-width: 1080px) 290px, (min-width: 720px) 31vw, 46vw">
+      </div>
+      <div class="card-body">
+        <h3 class="card-name"></h3>
+        <p class="card-cat"></p>
+        <button type="button" class="btn btn-secondary btn-block" data-act="add">Tambah</button>
+        <div class="stepper" role="group" hidden>
+          <button type="button" class="stepper-btn" data-act="dec">−</button>
+          <span class="stepper-qty"></span>
+          <button type="button" class="stepper-btn" data-act="inc">+</button>
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <template id="tpl-row">
+    <li class="row">
+      <img class="row-thumb" alt="" width="56" height="84" decoding="async">
+      <div class="row-main">
+        <p class="row-name"></p>
+        <p class="row-meta"></p>
+        <div class="row-controls">
+          <div class="stepper stepper-sm" role="group">
+            <button type="button" class="stepper-btn" data-act="dec">−</button>
+            <span class="stepper-qty"></span>
+            <button type="button" class="stepper-btn" data-act="inc">+</button>
+          </div>
+          <button type="button" class="text-btn" data-act="remove">Hapus</button>
+        </div>
+      </div>
+      <p class="row-subtotal"></p>
+    </li>
+  </template>
+</body>
+</html>

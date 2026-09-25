@@ -1,0 +1,9 @@
+{
+  "name": "grand-frame",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "test": "node --test \"tests/*.test.js\""
+  }
+}
