@@ -101,7 +101,7 @@ function dropSrcsetOnError(img) {
 // ---------- Motion ----------
 
 // Elemen memudar masuk saat pertama kali terlihat. Dengan reduced motion semuanya langsung tampil.
-const revealer = reducedMotion.matches || !("IntersectionObserver" in window)
+const revealer = reducedMotion.matches
   ? null
   : new IntersectionObserver(onReveal, { rootMargin: "0px 0px -10% 0px" });
 
