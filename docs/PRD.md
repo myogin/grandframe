@@ -94,7 +94,7 @@ Tanggal ditampilkan dalam format panjang bahasa Indonesia, misalnya "10 Oktober 
 
 ### 6.3 Hero
 
-- Headline (usulan copy): "Raketmu layak dipajang."
+- Headline (usulan copy): "Main di lapangan, tampil di dinding."
 - Subteks (usulan, sesuaikan): "Frame untuk raket tennis dan padel. Dibuat per batch, dipesan lewat WhatsApp."
 - CTA: "Lihat katalog", berupa anchor ke section katalog.
 - Visual: satu foto frame berisi raket yang terpasang di dinding.
