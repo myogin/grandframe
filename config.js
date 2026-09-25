@@ -3,8 +3,8 @@
 
 export const config = {
   brand: "Grand Frame",
-  whatsapp: "62812xxxxxxxx",      // TODO: format internasional, tanpa + dan tanpa 0 di depan
-  instagram: "https://instagram.com/xxx", // TODO
+  whatsapp: "62895342574617",      // TODO: format internasional, tanpa + dan tanpa 0 di depan
+  instagram: "https://instagram.com/madeyoginugraha", // TODO
   price: 250000,                  // harga seragam semua produk, dalam rupiah
   paymentNote: "",                // TODO: ketentuan pembayaran untuk section Cara pesan
 
