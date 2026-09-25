@@ -107,6 +107,8 @@ const revealer = reducedMotion.matches
 
 function onReveal(entries) {
   let i = 0;
+  // Urut dari atas ke bawah; kartu dalam satu baris tetap kiri ke kanan (sort stabil).
+  entries.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
   for (const { target, isIntersecting, boundingClientRect } of entries) {
     if (!isIntersecting && boundingClientRect.top > 0) continue;
     // Yang terlihat bersamaan (misalnya satu baris kartu) muncul bergiliran.
